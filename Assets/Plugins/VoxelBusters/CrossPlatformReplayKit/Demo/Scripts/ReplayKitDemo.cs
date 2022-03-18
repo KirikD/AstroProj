@@ -3,8 +3,8 @@ using UnityEngine;
 using UnityEngine.UI;
 using VoxelBusters.ReplayKit;
 
-//namespace VoxelBusters.Demos.ReplayKit
-//{
+namespace VoxelBusters.Demos.ReplayKit
+{
     public class ReplayKitDemo : MonoBehaviour
     {
         #region Fields
@@ -119,9 +119,7 @@ using VoxelBusters.ReplayKit;
             ReplayKitManager.StopRecording((filePath, error) => {
                 Debug.Log("File path available : " + ReplayKitManager.GetPreviewFilePath());
             });
-        Invoke("SavePreview", 1);
-        Invoke("Preview", 3);
-    }
+        }
 
         public void Preview()
         {
@@ -201,5 +199,5 @@ using VoxelBusters.ReplayKit;
         }
 
         #endregion
-    //}
+    }
 }

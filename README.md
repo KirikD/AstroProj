@@ -1,2 +1,0 @@
-# AstroProj
- AstroProj карточки товаров

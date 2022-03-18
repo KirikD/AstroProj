@@ -6,29 +6,6 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/ImageTracking/ImageTrackingWithMultiplePrefabs/ImageTrackingWithMultiplePrefabs.unity
-    guid: a1bf0e7b9cece455f81c1d2731ba76e7
-  - enabled: 0
-    path: Assets/0LiveBookMain.unity
-    guid: 7e0ca7f0993ca394eb38fdad18892022
-  - enabled: 0
-    path: Assets/DinoARkitSc.unity
-    guid: 1ac3240d935c1af48a2683514159235a
-  - enabled: 0
-    path: Assets/UniversalMarkersAll.unity
-    guid: 837c94c7d389fdc428dc3b312fe30d83
-  - enabled: 0
-    path: Assets/zOldLiveBookMain.unity
-    guid: 32044af0336492d4488b8fa3c5a1832a
-  - enabled: 0
-    path: Assets/DinoScene.unity
-    guid: 8aefa04d0c41b924bbc934783a2a7900
-  m_configObjects:
-    UnityEditor.XR.ARCore.ARCoreSettings: {fileID: 11400000, guid: f8ce26fe3bc69499b9be4b2378e97a94,
-      type: 2}
-    UnityEditor.XR.ARKit.ARKitSettings: {fileID: 11400000, guid: 98c79e8cc22674a89a95a3a90e2b70cb,
-      type: 2}
-    com.unity.xr.arkit.PlayerSettings: {fileID: 11400000, guid: 2d5fb8e61571b4e3897f221189089fd6,
-      type: 2}
-    com.unity.xr.management.loader_settings: {fileID: 11400000, guid: e2f869774b12e400996eb546603602e3,
-      type: 2}
+    path: Assets/AstroMainScen.unity
+    guid: 9238c136b84dab943ad2a0a7acc768dd
+  m_configObjects: {}

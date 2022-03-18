@@ -72,7 +72,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _Refract:
-        m_Texture: {fileID: 2800000, guid: a0c55168c4eb26646a6bd97b7c8e4da0, type: 3}
+        m_Texture: {fileID: 2800000, guid: 6784bac73fa3b9b478362d41dd6dfeae, type: 3}
         m_Scale: {x: 2, y: 2}
         m_Offset: {x: 0, y: 0}
     - _Shadermap:
@@ -90,7 +90,7 @@ Material:
     - _Depth: 10.6
     - _DepthMax: 1
     - _DetailNormalMapScale: 1
-    - _Distort: 0.079
+    - _Distort: 0.01
     - _DstBlend: 10
     - _ENABLE_VC: 1
     - _EdgeFade: 0.05
