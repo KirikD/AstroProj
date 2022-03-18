@@ -1,2 +1,0 @@
-# UnityWaterShader
-Unity Water Shader
