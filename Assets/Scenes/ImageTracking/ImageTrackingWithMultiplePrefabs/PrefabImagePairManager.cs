@@ -76,13 +76,8 @@ namespace UnityEngine.XR.ARFoundation.Samples
         void Awake()
         {
             m_TrackedImageManager = GetComponent<ARTrackedImageManager>();
-            Invoke("resetARR", 1);
         }
-       public void resetARR() {
-            GameObject gg = GameObject.Find("AR Session");
-            ARSession arSession = gg.GetComponent<ARSession>();
-            arSession.Reset();
-        }
+
         void OnEnable()
         {
             m_TrackedImageManager.trackedImagesChanged += OnTrackedImagesChanged;
@@ -92,11 +87,7 @@ namespace UnityEngine.XR.ARFoundation.Samples
         {
             m_TrackedImageManager.trackedImagesChanged -= OnTrackedImagesChanged;
         }
-        public void OpenSite()
-        {
-          //  Application.OpenURL("http://kirikd.ru/EpsonServer/Arctic/A.html");
-            Application.OpenURL("http://kirikd.ru/EpsonServer/DinoAR/D.html");
-        }
+
         void OnTrackedImagesChanged(ARTrackedImagesChangedEventArgs eventArgs)
         {
             foreach (var trackedImage in eventArgs.added)
@@ -107,16 +98,11 @@ namespace UnityEngine.XR.ARFoundation.Samples
                 AssignPrefab(trackedImage);
             }
         }
-        GameObject delOld;
+
         void AssignPrefab(ARTrackedImage trackedImage)
         {
-
-
-            if (m_PrefabsDictionary.TryGetValue(trackedImage.referenceImage.guid, out var prefab)) {
-                try { Destroy(delOld); } catch { }
+            if (m_PrefabsDictionary.TryGetValue(trackedImage.referenceImage.guid, out var prefab))
                 m_Instantiated[trackedImage.referenceImage.guid] = Instantiate(prefab, trackedImage.transform);
-                delOld = m_Instantiated[trackedImage.referenceImage.guid];
-            }
         }
 
         public GameObject GetPrefabForReferenceImage(XRReferenceImage referenceImage)
@@ -127,10 +113,8 @@ namespace UnityEngine.XR.ARFoundation.Samples
             m_PrefabsDictionary[referenceImage.guid] = alternativePrefab;
             if (m_Instantiated.TryGetValue(referenceImage.guid, out var instantiatedPrefab))
             {
-                try { Destroy(delOld); } catch { }
                 m_Instantiated[referenceImage.guid] = Instantiate(alternativePrefab, instantiatedPrefab.transform.parent);
                 Destroy(instantiatedPrefab);
-                delOld = instantiatedPrefab;
             }
         }
 
