@@ -3,9 +3,10 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Reflection;
 using UnityEngine;
-
+using UnityEngine.UI;
 public class DistanceEventMaster : MonoBehaviour
 {
+    public Text[] DebugTXT;
     // Start is called before the first frame update
     [Header("точка обжект анимации к которой парентим дочерний обжект")]
     public Transform[] AnimPoint; public int AnimIndex;
@@ -17,7 +18,7 @@ public class DistanceEventMaster : MonoBehaviour
            // lightuser.GetComponent<light>().enabled = false;
         }
         //  this.Invoke("OpenScreen", transform, 2f); //    this.Invoke("SetParent", 5.34f, 2f); // 
-       
+        DebugTXT[0].text ="" + allMarkers.Length;
     }
 
     // Массив со всеми маркерами
@@ -45,6 +46,7 @@ public class DistanceEventMaster : MonoBehaviour
                 {
                     Debug.Log("<color=green>CollisionWidth: </color>" + allMarkers[AdderCucle].name);
                     AllVariantsActionsBaseNameSort(allMarkers[AdderCucle].gameObject.name); // допустим взаимодействуем с астеройдом пишем сюда имя астеройда
+                    DebugTXT[0].text = "" + allMarkers[AdderCucle].name;
                 }
                 oldName = allMarkers[AdderCucle].name;
             }
@@ -68,6 +70,7 @@ public class DistanceEventMaster : MonoBehaviour
         {
             if (AllVariantsActionsBase[i].name == nam)
             {
+                DebugTXT[1].text = "AllVar " + nam; DebugTXT[2].text = "AllVar " + AllVariantsActionsBase[i].name;
                 AnimIndex = AllVariantsActionsBase[i].AnimIndexID;
                 this.Invoke(AllVariantsActionsBase[i].ParentObjFunc, allMarkers[AdderCucle].transform, AllVariantsActionsBase[i].delayA); // парент функ
                 this.Invoke(AllVariantsActionsBase[i].AnimPlayFunc, allMarkers[AdderCucle].transform, AllVariantsActionsBase[i].delayB); // Аним функ
@@ -113,8 +116,8 @@ public class DistanceEventMaster : MonoBehaviour
     public void SetParentObject(Transform MainObj) // парентим к
     {
         Debug.Log("<color=red>SetParentObject: </color>" + MainObj.gameObject.name);
-
-        MainObj.GetChild(0).SetParent(this.transform.GetChild(AnimIndex), true); // мы берем в маркере обжект который всегда в иерархии 0  и парентим его к анимированному поинту который всегда номер 1 имеет
+        DebugTXT[3].text = "Parent  " + MainObj.gameObject.name;
+      MainObj.GetChild(0).SetParent(this.transform.GetChild(AnimIndex), true); // мы берем в маркере обжект который всегда в иерархии 0  и парентим его к анимированному поинту который всегда номер 1 имеет
 
     }
     public void PlayAnimation(Transform MainObj) // парентим к
@@ -124,6 +127,7 @@ public class DistanceEventMaster : MonoBehaviour
     }
     public void PlayAnimator(Transform MainObj) // парентим к
     {
+        DebugTXT[4].text = "PlayAnim  " + MainObj.gameObject.name;
         Debug.Log("<color=black>PlayAnimator: </color>" + MainObj.gameObject.name);
         transform.GetChild(AnimIndex).GetComponent<Animator>().speed = 1.0f;
        // AnimPoint[AnimIndex].GetComponent<AnimatorFunc>().PlayAnimator();
@@ -154,7 +158,9 @@ namespace UnityEngine
             }
 
             Type instance = behaviour.GetType();
-            MethodInfo mthd = instance.GetMethod(method);
+            if (method.Length < 3) method = "NullFunc";
+            MethodInfo mthd = instance.GetMethod(method); //Debug.Log("EE^ " + method);
+           
             mthd.Invoke(behaviour, new object[] { options });
 
             yield return null;

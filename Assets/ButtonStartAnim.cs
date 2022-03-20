@@ -13,7 +13,7 @@ public class ButtonStartAnim : MonoBehaviour
             // lightuser.GetComponent<light>().enabled = false;
         }
         //  this.Invoke("OpenScreen", transform, 2f); //    this.Invoke("SetParent", 5.34f, 2f); // 
-
+      
     }
     public bool IsActive = false;
     public void AnimPlay()
@@ -26,15 +26,22 @@ public class ButtonStartAnim : MonoBehaviour
         { //Play
             for (int i = 0; i < allMarkers.Length; i++)
             {
-                GetComponent<AnimationByButton>().PlayStopAnimation(true);
+               
+                try
+                {
+                    allMarkers[i].transform.GetChild(0).gameObject.GetComponent<AnimationByButton>().PlayStopAnimation(true);
+                }  catch { }
             }
         }
         else
         { //  Stop
             for (int i = 0; i < allMarkers.Length; i++)
             {
-                GetComponent<AnimationByButton>().PlayStopAnimation(false);
-            }
+                try
+                {
+                    allMarkers[i].transform.GetChild(0).gameObject.GetComponent<AnimationByButton>().PlayStopAnimation(false);
+                }  catch { }
+        }
         }
     }
 }

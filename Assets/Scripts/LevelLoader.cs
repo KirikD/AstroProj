@@ -77,14 +77,14 @@ public class LevelLoader : MonoBehaviour
           
             for (int i = 0; i < ObjsArr.Length; i++)
             {
-                ObjsArr[i].transform.localScale += new Vector3(0.15f, 0.15f, 0.15f);
+                ObjsArr[i].transform.localScale += new Vector3(0.1f, 0.1f, 0.1f);
             }
         }
         if (Val == -1)
         {
             for (int i = 0; i < ObjsArr.Length; i++)
             {
-                ObjsArr[i].transform.localScale += new Vector3(-0.15f, -0.15f, -0.15f);
+                ObjsArr[i].transform.localScale += new Vector3(-0.1f, -0.1f, -0.1f);
             }
           
         }

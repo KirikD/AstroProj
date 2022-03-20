@@ -8,7 +8,7 @@ public class AnimationByButton : MonoBehaviour
     void Start()
     {
         anim = gameObject.GetComponent<Animation>();
-        anim["Open"].layer = 123; // Close
+        //anim["Scene"].layer = 123; // Close
         anim.Stop();
        // anim["Open"].speed = 0.5f;
        // anim.Play("Open");
@@ -19,14 +19,21 @@ public class AnimationByButton : MonoBehaviour
     {
         if (isPlay)
         {
-            anim["Open"].speed = 0.5f;
-            anim.Play("Open");
+            //Debug.Log("PP");
+            anim["Scene"].normalizedTime = 0;
+            anim["Scene"].speed = 0.5f;
+
+            anim.Play("Scene");
+           
         }
-        else 
+        else
         {
-            anim["Open"].speed = 0.0f;
-            anim.Stop("Open");
-            anim["Open"].normalizedTime = 0;
+            //Debug.Log("SS");
+            anim["Scene"].normalizedTime = 0;
+            anim["Scene"].speed = 0.0f;
+           
+            anim.Stop("Scene");
+            
         }
     }
 }

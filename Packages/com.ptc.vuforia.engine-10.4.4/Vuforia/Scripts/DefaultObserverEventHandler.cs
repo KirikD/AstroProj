@@ -40,9 +40,11 @@ public class DefaultObserverEventHandler : MonoBehaviour
     protected ObserverBehaviour mObserverBehaviour;
     protected TargetStatus mPreviousTargetStatus = TargetStatus.NotObserved;
     protected bool mCallbackReceivedOnce;
-
+    protected virtual void Awake()
+    { transform.GetChild(0).gameObject.SetActive(true); }    
     protected virtual void Start()
     {
+        transform.GetChild(0).gameObject.SetActive(true);
         mObserverBehaviour = GetComponent<ObserverBehaviour>();
 
         if (mObserverBehaviour)
@@ -52,6 +54,7 @@ public class DefaultObserverEventHandler : MonoBehaviour
             
             OnObserverStatusChanged(mObserverBehaviour, mObserverBehaviour.TargetStatus);
         }
+        transform.GetChild(0).gameObject.SetActive(true);
     }
 
     protected virtual void OnDestroy()
