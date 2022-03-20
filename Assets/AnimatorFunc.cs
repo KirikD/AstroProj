@@ -13,8 +13,8 @@ public class AnimatorFunc : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    public void PlayStopAnimator()
     {
-        
+        AnimatR.speed = 1;
     }
 }

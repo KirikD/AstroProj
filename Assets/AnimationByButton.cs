@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class TestAnim : MonoBehaviour
+public class AnimationByButton : MonoBehaviour
 {
     public Animation anim;
     void Start()
@@ -15,8 +15,18 @@ public class TestAnim : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    public void PlayStopAnimation(bool isPlay)
     {
-        
+        if (isPlay)
+        {
+            anim["Open"].speed = 0.5f;
+            anim.Play("Open");
+        }
+        else 
+        {
+            anim["Open"].speed = 0.0f;
+            anim.Stop("Open");
+            anim["Open"].normalizedTime = 0;
+        }
     }
 }
