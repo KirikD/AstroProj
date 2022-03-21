@@ -9,7 +9,7 @@ public class UnSCRAsteroidCollapse : MonoBehaviour
     {
         
     }
-
+    public GameObject EnableEffect;
     void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.name == "Earth")
@@ -17,8 +17,17 @@ public class UnSCRAsteroidCollapse : MonoBehaviour
         {
             Debug.Log("CollapsErtgh!!");
             //Destroy(this.gameObject);
-            this.gameObject.SetActive(false);
+           
+            EnableEffect.SetActive(true);
+            Invoke("DelXlam",9);
+            this.gameObject.GetComponent<MeshRenderer>().enabled = false;
         }
+    }
+    void DelXlam()
+    {
+        Destroy(EnableEffect);
+        Destroy(this.gameObject.GetComponent<UnSCRAsteroidCollapse>());
+        this.gameObject.SetActive(false);
     }
     void OnTriggerExit(Collider other)
     {

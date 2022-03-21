@@ -12,7 +12,7 @@ public class EarthSystemController : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-        Earth = this.transform.FindChild("Earth");
+        Earth = this.transform.Find("Earth");
 	}
 	
 	// Update is called once per frame
