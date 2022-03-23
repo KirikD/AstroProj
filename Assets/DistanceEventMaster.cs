@@ -24,7 +24,7 @@ public class DistanceEventMaster : MonoBehaviour
     // Массив со всеми маркерами
     public GameObject[] allMarkers;
     int AdderCucle = 0;
-    string oldName  ="";
+    string oldName  =""; GameObject oldObjGeom ;
 
     [Header("Дистанция с которой начинаем взаимодействовать")]
     public float DistanceAction = 3;
@@ -44,11 +44,17 @@ public class DistanceEventMaster : MonoBehaviour
             {            // единыжды вызываем
                 if (oldName != allMarkers[AdderCucle].name)
                 {
+                    if (oldObjGeom != null)
+                        Destroy(oldObjGeom);
+                    oldName = allMarkers[AdderCucle].name;
+
                     Debug.Log("<color=green>CollisionWidth: </color>" + allMarkers[AdderCucle].name);
                     AllVariantsActionsBaseNameSort(allMarkers[AdderCucle].gameObject.name); // допустим взаимодействуем с астеройдом пишем сюда имя астеройда
                     DebugTXT[0].text = "" + allMarkers[AdderCucle].name;
+
+                    oldObjGeom = allMarkers[AdderCucle].transform.GetChild(0).gameObject;
                 }
-                oldName = allMarkers[AdderCucle].name;
+              
             }
         }
         // Если отдалились то у этого обжекта выводим имя
@@ -56,6 +62,9 @@ public class DistanceEventMaster : MonoBehaviour
         {
             if (oldName == allMarkers[AdderCucle].name)
             {
+                if (oldObjGeom != null)
+                    Destroy(oldObjGeom);
+
                 oldName = " ";
                 Debug.Log("<color=yellow>CollisionWidth: </color>" + allMarkers[AdderCucle].name);
                // this.Invoke("DeParent", allMarkers[AdderCucle].transform, 2f); // 
@@ -129,6 +138,9 @@ public class DistanceEventMaster : MonoBehaviour
     {
         DebugTXT[4].text = "PlayAnim  " + MainObj.gameObject.name;
         Debug.Log("<color=black>PlayAnimator: </color>" + MainObj.gameObject.name);
+
+        transform.GetChild(AnimIndex).GetComponent<Animator>().Rebind();
+        transform.GetChild(AnimIndex).GetComponent<Animator>().Update(0f);
         transform.GetChild(AnimIndex).GetComponent<Animator>().speed = 1.0f;
        // AnimPoint[AnimIndex].GetComponent<AnimatorFunc>().PlayAnimator();
     }
