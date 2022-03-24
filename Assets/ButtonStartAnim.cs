@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using UnityEngine.UI;
 public class ButtonStartAnim : MonoBehaviour
 {
     public GameObject[] allMarkers;
@@ -48,6 +48,7 @@ public class ButtonStartAnim : MonoBehaviour
                 }  catch { }
         }
         }
+        this.gameObject.GetComponent<Image>().enabled = false;
     }
     public void ReloadThisLevelBtt()
     {

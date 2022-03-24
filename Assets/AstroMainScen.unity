@@ -19085,8 +19085,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   allMarkers: []
-  recordIco: {fileID: 0}
-  stopIco: {fileID: 0}
+  recordIco: {fileID: 1100663080}
+  stopIco: {fileID: 870906126}
   IsActive: 0
 --- !u!114 &2102690498
 MonoBehaviour:
