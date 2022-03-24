@@ -51,7 +51,6 @@ public class NativeGalleryScr : MonoBehaviour
 
 		// Save the screenshot to Gallery/Photos
 		NativeGallery.Permission permission = NativeGallery.SaveImageToGallery(ss, "GalleryTest", "Image.png", (success, path) => Debug.Log("Media save result: " + success + " " + path));
-
 		Debug.Log("Permission result: " + permission);
 
 		// To avoid memory leaks
