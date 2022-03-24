@@ -20,6 +20,7 @@ public class AnimationByButton : MonoBehaviour
         if (isPlay)
         {
             //Debug.Log("PP");
+            anim.Play();
             anim["Scene"].normalizedTime = 0;
             anim["Scene"].speed = 0.5f;
 
@@ -30,6 +31,7 @@ public class AnimationByButton : MonoBehaviour
         {
             //Debug.Log("SS");
             anim["Scene"].normalizedTime = 0;
+            anim.Stop();
             anim["Scene"].speed = 0.0f;
            
             anim.Stop("Scene");

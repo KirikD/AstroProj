@@ -13,8 +13,9 @@ public class ButtonStartAnim : MonoBehaviour
             // lightuser.GetComponent<light>().enabled = false;
         }
         //  this.Invoke("OpenScreen", transform, 2f); //    this.Invoke("SetParent", 5.34f, 2f); // 
-      
+
     }
+    public GameObject recordIco, stopIco;
     public bool IsActive = false;
     public void AnimPlay()
     {
@@ -23,7 +24,9 @@ public class ButtonStartAnim : MonoBehaviour
 
         //-----------------------------------------------
         if (IsActive == true)
-        { //Play
+        { //Play            
+            recordIco.SetActive(false);    //if the boolean is true
+            stopIco.SetActive(true);
             for (int i = 0; i < allMarkers.Length; i++)
             {
                
@@ -35,6 +38,8 @@ public class ButtonStartAnim : MonoBehaviour
         }
         else
         { //  Stop
+            recordIco.SetActive(true);    //if the boolean is true
+            stopIco.SetActive(false);
             for (int i = 0; i < allMarkers.Length; i++)
             {
                 try
@@ -43,5 +48,9 @@ public class ButtonStartAnim : MonoBehaviour
                 }  catch { }
         }
         }
+    }
+    public void ReloadThisLevelBtt()
+    {
+        Application.LoadLevel(Application.loadedLevel);
     }
 }

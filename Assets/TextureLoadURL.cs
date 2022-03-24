@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.Networking;
+using System.IO;
 
 public class TextureLoadURL : MonoBehaviour
 {
@@ -32,11 +33,13 @@ public class TextureLoadURL : MonoBehaviour
             // сохранили текстуру куда то
             byte[] bytes = tex2D.EncodeToJPG();
             System.IO.File.WriteAllBytes(Application.persistentDataPath + "/" + "PrTex.png", bytes);
-            permissionT.text = "Prem^ " + Application.persistentDataPath + "/" + "PrTex.png";
+            permissionT.text = pathh = "" + Application.persistentDataPath + "/" + "PrTex.png";
             tex2D.Compress(true);
+
+            OlnlyLoadImg();
         }
     }
-    string pathh;
+    public string pathh;
     void SaveImg()
     {
 
@@ -45,4 +48,22 @@ public class TextureLoadURL : MonoBehaviour
         PathT.text = pathh;
        
     }
+    public void OlnlyLoadImg()
+    {
+        StartCoroutine(LoadTextureFromCache(pathh));
+    }
+    public Texture2D tex2DOlnly;
+    IEnumerator LoadTextureFromCache(string filePath)
+    {
+        if (!File.Exists(filePath))
+        {
+            yield break;
+        }
+        var www = UnityWebRequestTexture.GetTexture("file://" + filePath);
+        yield return www.SendWebRequest();
+        //texture loaded
+        tex2DOlnly = DownloadHandlerTexture.GetContent(www);
+
+    }
+
 }
