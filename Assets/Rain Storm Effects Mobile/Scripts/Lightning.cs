@@ -14,16 +14,41 @@ public class Lightning : MonoBehaviour{
 	{
 		StartCoroutine(lighter());
 	}
-
-	IEnumerator lighter(){
-		while (true)
+	public MeshRenderer mr;
+	public bool EnabLightFl;
+	bool once = true;
+    private void Update()
+    {
+		if (mr.enabled == true)
 		{
-		yield return new WaitForSeconds(Random.Range(offMin, offMax));
-		lightning.SetActive(true);
-		yield return new WaitForSeconds(Random.Range(0.25f, 2.0f));
-		GetComponent<AudioSource>().PlayOneShot(Thunder[Random.Range(0, Thunder.Length)]);
-		yield return new WaitForSeconds(Random.Range(onMin, onMax));
-		lightning.SetActive(false);
+			if (once == true)
+			{
+				EnabLightFl = true;
+				once = false;
+				StartCoroutine(lighter());
+			}
+		}
+		else
+		{
+			if (once == false)
+			{
+				EnabLightFl = false;
+				
+			}
+		}
+	}
+	IEnumerator lighter() {
+		if (EnabLightFl)
+		{
+			while (true)
+			{
+				yield return new WaitForSeconds(Random.Range(offMin, offMax));
+				lightning.SetActive(true);
+				yield return new WaitForSeconds(Random.Range(0.25f, 2.0f));
+				GetComponent<AudioSource>().PlayOneShot(Thunder[Random.Range(0, Thunder.Length)]);
+				yield return new WaitForSeconds(Random.Range(onMin, onMax));
+				lightning.SetActive(false);
+			}
 		}
 	}
 }
