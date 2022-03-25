@@ -44,7 +44,7 @@ Material:
         m_Scale: {x: 3, y: 2}
         m_Offset: {x: 0, y: 0}
     - _Ramp:
-        m_Texture: {fileID: 2800000, guid: 7fec3cfa95f7cb041923abd566c76e9d, type: 3}
+        m_Texture: {fileID: 2800000, guid: 81e29afa2e0920c43ae714c809c3bf47, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _SubMap:
@@ -57,14 +57,14 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
-    - _Aniso: 0.55906594
+    - _Aniso: 0.443
     - _Coverage: 0.5
-    - _Depth: 0.08928572
-    - _Glitter: 3.2142856
+    - _Depth: -1.04
+    - _Glitter: 3.7
     - _RampPower: 1
-    - _Shininess: 0.055557743
+    - _Shininess: 0.052
     - _Smooth: 0.5
-    - _Specular: 3.482143
+    - _Specular: 3.63
     - _Spread: 1
     - _Transition: 0.5
     - _TransitionSmooth: 0.5
