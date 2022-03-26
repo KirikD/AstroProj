@@ -60,7 +60,7 @@ public class LevelLoader : MonoBehaviour
     void LoadShowFinishA()
     { loaF1.SetActive(true); }
         void LoadShowFinishB()
-    { loaFHidge.SetActive(false); }
+    { loaFHidge.SetActive(false); GameObject.Find("CameraFakeFocus").SetActive(false); }
 
 
 

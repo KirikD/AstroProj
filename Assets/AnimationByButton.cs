@@ -31,7 +31,7 @@ public class AnimationByButton : MonoBehaviour
         {
             anim.Stop();
             anim["SceneC"].normalizedTime = 0;
-            anim["SceneC"].speed = 0.0f;
+            anim["SceneC"].speed = 0.5f;
            
             anim.Play("SceneC");
             

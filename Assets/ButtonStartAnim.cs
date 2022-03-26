@@ -16,39 +16,53 @@ public class ButtonStartAnim : MonoBehaviour
 
     }
     public GameObject recordIco, stopIco;
-    public bool IsActive = false;
+    public bool IsActive = false;  bool isWaitAnim = true;
     public void AnimPlay()
     {
         IsActive = !IsActive;               //if inventory is already True it will set it to false And the other way around.
                                             //all with the same key press that can be changed in the inspector. AnimationByButton
 
         //-----------------------------------------------
-        if (IsActive == true)
-        { //Play            
-            recordIco.SetActive(false);    //if the boolean is true
-            stopIco.SetActive(true);
-            for (int i = 0; i < allMarkers.Length; i++)
+        if (IsActive == true )
+        {
+            if (isWaitAnim)
             {
-               
-                try
+                isWaitAnim = false; Invoke(nameof(ButtonStartAnim.WaitAnim), 3);
+                recordIco.SetActive(false);    //if the boolean is true
+                stopIco.SetActive(true);
+                for (int i = 0; i < allMarkers.Length; i++)
                 {
-                    allMarkers[i].transform.GetChild(0).gameObject.GetComponent<AnimationByButton>().PlayStopAnimation(true);
-                }  catch { }
+
+                    try
+                    {
+                        allMarkers[i].transform.GetChild(0).gameObject.GetComponent<AnimationByButton>().PlayStopAnimation(true);
+                    }
+                    catch { }
+                }
             }
         }
         else
-        { //  Stop
-            recordIco.SetActive(true);    //if the boolean is true
-            stopIco.SetActive(false);
-            for (int i = 0; i < allMarkers.Length; i++)
+        {
+            if (isWaitAnim)
             {
-                try
+                isWaitAnim = false; Invoke(nameof(ButtonStartAnim.WaitAnim),3);
+                recordIco.SetActive(true);    //if the boolean is true
+                stopIco.SetActive(false);
+                for (int i = 0; i < allMarkers.Length; i++)
                 {
-                    allMarkers[i].transform.GetChild(0).gameObject.GetComponent<AnimationByButton>().PlayStopAnimation(false);
-                }  catch { }
-        }
+                    try
+                    {
+                        allMarkers[i].transform.GetChild(0).gameObject.GetComponent<AnimationByButton>().PlayStopAnimation(false);
+                    }
+                    catch { }
+                }
+            }
         }
         this.gameObject.GetComponent<Image>().enabled = false;
+    }
+    void WaitAnim() 
+    {
+        isWaitAnim = true;
     }
     public void ReloadThisLevelBtt()
     {
