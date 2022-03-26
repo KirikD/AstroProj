@@ -20,7 +20,7 @@ public class AnimationByButton : MonoBehaviour
         if (isPlay)
         {
             //Debug.Log("PP");
-            anim.Play();
+            anim.Stop();
             anim["Scene"].normalizedTime = 0;
             anim["Scene"].speed = 0.5f;
 
@@ -29,12 +29,11 @@ public class AnimationByButton : MonoBehaviour
         }
         else
         {
-            //Debug.Log("SS");
-            anim["Scene"].normalizedTime = 0;
             anim.Stop();
-            anim["Scene"].speed = 0.0f;
+            anim["SceneC"].normalizedTime = 0;
+            anim["SceneC"].speed = 0.0f;
            
-            anim.Stop("Scene");
+            anim.Play("SceneC");
             
         }
     }

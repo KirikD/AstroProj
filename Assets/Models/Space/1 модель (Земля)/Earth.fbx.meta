@@ -8,7 +8,7 @@ ModelImporter:
     second: Scene
   - first:
       74: 1007095770567677685
-    second: Close
+    second: SceneC
   externalObjects: {}
   materials:
     materialImportMode: 2
@@ -43,12 +43,12 @@ ModelImporter:
       takeName: Scene
       internalID: 0
       firstFrame: 1
-      lastFrame: 160
-      wrapMode: 2
+      lastFrame: 100
+      wrapMode: 1
       orientationOffsetY: 0
       level: 0
       cycleOffset: 0
-      loop: 1
+      loop: 0
       hasAdditiveReferencePose: 0
       loopTime: 0
       loopBlend: 0
@@ -68,12 +68,12 @@ ModelImporter:
       maskSource: {instanceID: 0}
       additiveReferencePoseFrame: 0
     - serializedVersion: 16
-      name: Close
+      name: SceneC
       takeName: Scene
       internalID: 0
-      firstFrame: 80
-      lastFrame: 160
-      wrapMode: 0
+      firstFrame: 100
+      lastFrame: 200
+      wrapMode: 1
       orientationOffsetY: 0
       level: 0
       cycleOffset: 0
