@@ -62,7 +62,8 @@ public class LevelLoader : MonoBehaviour
         void LoadShowFinishB()
     { loaFHidge.SetActive(false); GameObject.Find("CameraFakeFocus").SetActive(false); }
 
-
+    public void AutoFocOncesF()
+    { GameObject.Find("ARCamera").GetComponent<AutoFocusMod>().AutoFocOnces(); }
 
     public GameObject[] ObjsArr;
     public void ZoomIn(int Val)

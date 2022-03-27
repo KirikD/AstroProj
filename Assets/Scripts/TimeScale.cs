@@ -8,9 +8,9 @@ public class TimeScale : MonoBehaviour {
 	public static string header = "Solar System";
 	public static string info = "Mercury\nVenus\nEarth\nMars";
 
-	public GUIStyle styleHeader;
+//	public GUIStyle styleHeader;
 
-    void OnGUI()
+   /* void OnGUI()
     {
 		styleHeader.fontSize = 20;
 		styleHeader.fontStyle = FontStyle.Bold;
@@ -23,5 +23,5 @@ public class TimeScale : MonoBehaviour {
 		GUI.Label (new Rect (10, 120, 400, 400), new GUIContent(info));
 
 		GUI.Label (new Rect (500, 20, 400, 20), new GUIContent("Made by Saatvik, Akshat, Aniket, Dee"));
-    }
+    }*/
 }
