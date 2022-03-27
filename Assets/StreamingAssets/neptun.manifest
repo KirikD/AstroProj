@@ -1,0 +1,39 @@
+ManifestFileVersion: 0
+CRC: 2670714420
+Hashes:
+  AssetFileHash:
+    serializedVersion: 2
+    Hash: fbdcc8a8573fd54f16b6a35bb5bd3c78
+  TypeTreeHash:
+    serializedVersion: 2
+    Hash: f71ab2d35efdc5e791ca0fd19d2bbb90
+HashAppended: 0
+ClassTypes:
+- Class: 1
+  Script: {instanceID: 0}
+- Class: 4
+  Script: {instanceID: 0}
+- Class: 21
+  Script: {instanceID: 0}
+- Class: 23
+  Script: {instanceID: 0}
+- Class: 28
+  Script: {instanceID: 0}
+- Class: 33
+  Script: {instanceID: 0}
+- Class: 43
+  Script: {instanceID: 0}
+- Class: 48
+  Script: {instanceID: 0}
+- Class: 111
+  Script: {instanceID: 0}
+- Class: 114
+  Script: {fileID: 11500000, guid: 9a709b887df70e143851eaaca988c867, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: dfb7ac447941d164d9b6ac69ce109e65, type: 3}
+- Class: 115
+  Script: {instanceID: 0}
+SerializeReferenceClassIdentifiers: []
+Assets:
+- Assets/AllModelPrefs/Neptune.prefab
+Dependencies: []
