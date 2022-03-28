@@ -44,8 +44,8 @@ public class DistanceEventMaster : MonoBehaviour
             {            // единыжды вызываем
                 if (oldName != allMarkers[AdderCucle].name)
                 {
-                    if (oldObjGeom != null)
-                        Destroy(oldObjGeom);
+                    //if (oldObjGeom != null)
+                        //Destroy(oldObjGeom);
                     oldName = allMarkers[AdderCucle].name;
 
                     Debug.Log("<color=green>CollisionWidth: </color>" + allMarkers[AdderCucle].name);
@@ -62,13 +62,13 @@ public class DistanceEventMaster : MonoBehaviour
         {
             if (oldName == allMarkers[AdderCucle].name)
             {
-                if (oldObjGeom != null)
-                    Destroy(oldObjGeom);
+
 
                 oldName = " ";
                 Debug.Log("<color=yellow>CollisionWidth: </color>" + allMarkers[AdderCucle].name);
                 DistantedOffMarker(allMarkers[AdderCucle].gameObject.name); // отдалились 
-                // this.Invoke("DeParent", allMarkers[AdderCucle].transform, 2f); // 
+                //if (oldObjGeom != null)
+                   // Destroy(oldObjGeom);
             }
         }
 
@@ -85,7 +85,6 @@ public class DistanceEventMaster : MonoBehaviour
                 this.Invoke(AllVariantsActionsBase[i].ParentObjFunc, allMarkers[AdderCucle].transform, AllVariantsActionsBase[i].delayA); // парент функ
                 this.Invoke(AllVariantsActionsBase[i].AnimPlayFunc, allMarkers[AdderCucle].transform, AllVariantsActionsBase[i].delayB); // Аним функ
                 this.Invoke(AllVariantsActionsBase[i].BaseFunc, allMarkers[AdderCucle].transform, AllVariantsActionsBase[i].delayС); // Аниматор функ
-                this.Invoke(AllVariantsActionsBase[i].ThirdFuncInvoke, allMarkers[AdderCucle].transform, AllVariantsActionsBase[i].delayD); // Аним функ
               
             }
         }
@@ -97,8 +96,8 @@ public class DistanceEventMaster : MonoBehaviour
             if (AllVariantsActionsBase[i].name == nam)
             {
                 DebugTXT[1].text = "AllVar " + nam; DebugTXT[2].text = "AllVar " + AllVariantsActionsBase[i].name;          
-                this.Invoke(AllVariantsActionsBase[i].BaseFunc, allMarkers[AdderCucle].transform, AllVariantsActionsBase[i].delayA); // парент функ
-                this.Invoke(AllVariantsActionsBase[i].ThirdFuncInvoke, allMarkers[AdderCucle].transform, AllVariantsActionsBase[i].delayB); // Аним функ
+                this.Invoke(AllVariantsActionsBase[i].FuncOtdalF_A, allMarkers[AdderCucle].transform, AllVariantsActionsBase[i].delayE); // парент функ
+                this.Invoke(AllVariantsActionsBase[i].FuncOtdalF_B, allMarkers[AdderCucle].transform, AllVariantsActionsBase[i].delayF); // Аним функ
             }
         }
     }
@@ -116,18 +115,19 @@ public class DistanceEventMaster : MonoBehaviour
 
         [Header("Функция которую мы выполняем с дочерним обжектом и время через (парент)")]
         public string ParentObjFunc = "NullFunc"; public float delayA = 0.01f;
-        [Header("Анимированный индекс обжект с анимацией")]
+       // [Header("Анимированный индекс обжект с анимацией")]
         public int AnimIndexID;
         [Header("Вторая Функция которую мы выполняем с дочерним обжектом и время через (запуск анимации)")]
         public string AnimPlayFunc = "NullFunc"; public float delayB = 0.01f;
         [Header("Базовая Функция которую мы выполняем с дочерним обжектом и время через (аниматор точка плей)")]
         public string BaseFunc = "NullFunc"; public float delayС = 0.01f;
-        [Header("Третья Функция которую мы выполняем с дочерним обжектом и время через (Доп действие)")]
-        public string ThirdFuncInvoke = "NullFunc"; public float delayD = 0.01f;
         // возможности при взаимодействии: 1 запуск анимации 2 выполнение какой либо инвоук функции через стринг список функций снизу
-       
 
-      
+
+        [Header("Отдалили функция Первая")]
+        public string FuncOtdalF_A = "NullFunc"; public float delayE = 2.5f;
+        [Header("Отдалили функция Вторая")]
+        public string FuncOtdalF_B = "NullFunc"; public float delayF = 4.5f;
 
     }
 
@@ -162,10 +162,11 @@ public class DistanceEventMaster : MonoBehaviour
         Debug.Log("<color=red>DeParent: </color>" + poss.gameObject.name);
         poss.SetParent(null);
     }
+
     public void GrozaInCiclonFunctionOn(Transform MainObj) // выполняем это на самом обекте на котором скрипт
-    { transform.GetChild(0).GetChild(0).gameObject.SetActive(true); Debug.Log("<color=red>GrozaInCiclonFunctionOn: </color>" + MainObj.gameObject.name);  }// гроза  
+    { transform.GetChild(0).GetChild(AnimIndex).gameObject.SetActive(true); Debug.Log("<color=red>GrozaInCiclonFunctionOn: </color>" + MainObj.gameObject.name);  }// гроза  
     public void GrozaInCiclonFunctionOff(Transform MainObj) // выполняем это на самом обекте на котором скрипт
-    { transform.GetChild(0).GetChild(0).gameObject.SetActive(false); }// гроза  
+    { transform.GetChild(0).GetChild(AnimIndex).gameObject.SetActive(false); }// гроза  
 
 }
 
