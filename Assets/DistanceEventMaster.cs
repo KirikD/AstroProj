@@ -67,13 +67,14 @@ public class DistanceEventMaster : MonoBehaviour
 
                 oldName = " ";
                 Debug.Log("<color=yellow>CollisionWidth: </color>" + allMarkers[AdderCucle].name);
-               // this.Invoke("DeParent", allMarkers[AdderCucle].transform, 2f); // 
+                DistantedOffMarker(allMarkers[AdderCucle].gameObject.name); // отдалились 
+                // this.Invoke("DeParent", allMarkers[AdderCucle].transform, 2f); // 
             }
         }
 
      }
     // сортируем массив по имени
-    void AllVariantsActionsBaseNameSort(string nam)
+    void AllVariantsActionsBaseNameSort(string nam) // выполн€ем когда приблизили к маркеру
     {
         for (int i = 0; i < AllVariantsActionsBase.Count; i++)
         {
@@ -89,7 +90,18 @@ public class DistanceEventMaster : MonoBehaviour
             }
         }
     }
-
+    void DistantedOffMarker(string nam) // выполн€ем отдалились от маркера
+    {
+        for (int i = 0; i < AllVariantsActionsBase.Count; i++)
+        {
+            if (AllVariantsActionsBase[i].name == nam)
+            {
+                DebugTXT[1].text = "AllVar " + nam; DebugTXT[2].text = "AllVar " + AllVariantsActionsBase[i].name;          
+                this.Invoke(AllVariantsActionsBase[i].BaseFunc, allMarkers[AdderCucle].transform, AllVariantsActionsBase[i].delayA); // парент функ
+                this.Invoke(AllVariantsActionsBase[i].ThirdFuncInvoke, allMarkers[AdderCucle].transform, AllVariantsActionsBase[i].delayB); // јним функ
+            }
+        }
+    }
     [SerializeField]
     public List<ActionsWhenCollision> AllVariantsActionsBase = new List<ActionsWhenCollision>();
 
@@ -99,8 +111,8 @@ public class DistanceEventMaster : MonoBehaviour
         [SerializeField]
         [Header("им€ обекта на которое мы производим воздействие")]
         public string name; // им€ обекта на которое мы производим воздействие
-        [Header("≈сли заполнено то с этим обектом тоже выполн€ем взаимодействие")]
-        public string thisName; //
+        //[Header("≈сли заполнено то с этим обектом тоже выполн€ем взаимодействие")]
+        //public string thisName; //
 
         [Header("‘ункци€ которую мы выполн€ем с дочерним обжектом и врем€ через (парент)")]
         public string ParentObjFunc = "NullFunc"; public float delayA = 0.01f;
@@ -150,6 +162,11 @@ public class DistanceEventMaster : MonoBehaviour
         Debug.Log("<color=red>DeParent: </color>" + poss.gameObject.name);
         poss.SetParent(null);
     }
+    public void GrozaInCiclonFunctionOn(Transform MainObj) // выполн€ем это на самом обекте на котором скрипт
+    { transform.GetChild(0).GetChild(0).gameObject.SetActive(true); Debug.Log("<color=red>GrozaInCiclonFunctionOn: </color>" + MainObj.gameObject.name);  }// гроза  
+    public void GrozaInCiclonFunctionOff(Transform MainObj) // выполн€ем это на самом обекте на котором скрипт
+    { transform.GetChild(0).GetChild(0).gameObject.SetActive(false); }// гроза  
+
 }
 
 namespace UnityEngine

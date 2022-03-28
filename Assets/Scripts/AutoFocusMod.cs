@@ -15,19 +15,19 @@ public class AutoFocusMod : MonoBehaviour
     }
     void Poststart()
     {
-        CameraDevice.Instance.SetFocusMode(FocusMode.FOCUS_MODE_MACRO);
+        CameraDevice.Instance.SetFocusMode(FocusMode.FOCUS_MODE_CONTINUOUSAUTO);
   
     }
     private void OnVuforiaStarted()
     {
-        CameraDevice.Instance.SetFocusMode(FocusMode.FOCUS_MODE_MACRO);
+        CameraDevice.Instance.SetFocusMode(FocusMode.FOCUS_MODE_CONTINUOUSAUTO);
     }
 
     private void OnPaused(bool paused)
     {
         if (!paused) // resumed
         {
-            CameraDevice.Instance.SetFocusMode(FocusMode.FOCUS_MODE_MACRO);
+            CameraDevice.Instance.SetFocusMode(FocusMode.FOCUS_MODE_CONTINUOUSAUTO);
         }
     }
     public void AutoFocOnces()
