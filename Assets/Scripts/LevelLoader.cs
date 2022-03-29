@@ -66,29 +66,37 @@ public class LevelLoader : MonoBehaviour
     { GameObject.Find("ARCamera").GetComponent<AutoFocusMod>().AutoFocOnces(); }
 
     public GameObject[] ObjsArr;
+    public  int zoomMax = 1;
     public void ZoomIn(int Val)
     {
-
+      zoomMax += Val; 
+      zoomMax = Mathf.Clamp(zoomMax, -2, 10);
+      if (Mathf.Clamp(zoomMax, -1, 9) == zoomMax)
+      {
+          
         // if (Val == 1)
         //     ppm.zoomFunc(0.1f);
         //  if (Val == 1)
         //      ppm.zoomFunc(-0.1f);
-        if (Val == 1)
+            if (Val == 1)
         {
-          
+
             for (int i = 0; i < ObjsArr.Length; i++)
             {
-                ObjsArr[i].transform.localScale += new Vector3(0.1f, 0.1f, 0.1f);
+                //ObjsArr[i].transform.localScale += new Vector3(0.1f, 0.1f, 0.1f);
+                ObjsArr[i].GetComponent<ScaleSetterFix>().scalOneSet *= 1.1f;
             }
         }
         if (Val == -1)
         {
             for (int i = 0; i < ObjsArr.Length; i++)
             {
-                ObjsArr[i].transform.localScale += new Vector3(-0.1f, -0.1f, -0.1f);
+                //ObjsArr[i].transform.localScale += new Vector3(-0.1f, -0.1f, -0.1f);
+                ObjsArr[i].GetComponent<ScaleSetterFix>().scalOneSet *= 0.9f;
             }
-          
+
         }
+      }
     }
 
 

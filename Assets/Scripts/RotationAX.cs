@@ -10,5 +10,7 @@ public class RotationAX : MonoBehaviour {
         this.transform.Rotate(Vector3.up, Time.deltaTime * speedX);
         this.transform.Rotate(Vector3.forward, Time.deltaTime * speedY);
         this.transform.Rotate(Vector3.left, Time.deltaTime * speedZ);
+        
     }
+   
 }
