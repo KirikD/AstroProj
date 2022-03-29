@@ -14,13 +14,17 @@ public class NewBandleLoader : MonoBehaviour
     public string BundleLocalLoadPath = "Не нужно заполнять! поле забивается само!";
     public string PrefabGameobjectName = "asteroids";
     void Start()
-    {
-        // но вначале пытаемся инстансировать его
-        BundleLocalLoadPath = Application.persistentDataPath + "/" + BundleFileFolderName + "/" + BundleFileName + ".unity3d";
-        StartCoroutine(LoadObject(BundleLocalLoadPath));
-
+    {        
         // скачиваем префаб
-        StartCoroutine(downloadAsset(UrlBundleDawnload));
+        if (PlayerPrefs.GetInt(BundleFileName + "A") != 10)
+        {
+            Debug.Log("OnceAlltime");
+            PlayerPrefs.SetInt(BundleFileName + "A", 10);
+            StartCoroutine(downloadAsset(UrlBundleDawnload));
+        }
+
+        // и Если ассет скачан то пытаемся инстансировать его сразу
+        SetInstance();
     }
     IEnumerator downloadAsset(string URLpath)
     {
@@ -65,16 +69,22 @@ public class NewBandleLoader : MonoBehaviour
         {
             File.WriteAllBytes(path, data);
             Debug.Log("Saved Data to: " + path.Replace("/", "\\"));
+            Invoke(nameof(SetInstance), 2); // инстансируем данные
         }
         catch (Exception e)
         {
             Debug.LogWarning("Failed To Save Data to: " + path.Replace("/", "\\"));
             Debug.LogWarning("Error: " + e.Message);
         }
+       
     }
 
 
-    //   void Update()   {       }
+       void SetInstance()
+    {    // и пытаемся инстансировать его
+        BundleLocalLoadPath = Application.persistentDataPath + "/" + BundleFileFolderName + "/" + BundleFileName + ".unity3d";
+        StartCoroutine(LoadObject(BundleLocalLoadPath));
+    }
 
     IEnumerator LoadObject(string path)
     {
@@ -96,7 +106,8 @@ public class NewBandleLoader : MonoBehaviour
         obj.transform.Rotate(350.41f, 400f, 20f);
         obj.transform.localScale = new Vector3(1.0518f, 0.998f, 1.1793f);
 
-        Instantiate(obj);
+        GameObject InstancedBandle = Instantiate(obj);
+        InstancedBandle.transform.SetParent(this.gameObject.transform,true);
 
         myLoadedAssetBundle.Unload(false);
     }
