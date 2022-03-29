@@ -1,17 +1,21 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.IO;
 using UnityEngine;
+using UnityEngine.Networking;
 
 public class NewBandleLoader : MonoBehaviour
 {
     // Start is called before the first frame update
     void Start()
     {
-        
+        StartCoroutine(downloadAsset("http://kirikd.ru/AstroProject/cosmos"));
+        // StartCoroutine(LoadObject("Application.persistentDataPath + WaterVehicles.unity3d"));
     }
-    IEnumerator downloadAsset()
+    IEnumerator downloadAsset(string URLpath)
     {
-        string url = "http://url.net/YourAsset.unity3d";
+        string url = URLpath;
 
         UnityWebRequest www = UnityWebRequest.Get(url);
         DownloadHandler handle = www.downloadHandler;
@@ -19,14 +23,14 @@ public class NewBandleLoader : MonoBehaviour
         //Send Request and wait
         yield return www.Send();
 
-        if (www.isError)
+        if (www.isNetworkError)
         {
 
             UnityEngine.Debug.Log("Error while Downloading Data: " + www.error);
         }
         else
         {
-            UnityEngine.Debug.Log("Success");
+            UnityEngine.Debug.Log("Success   " + Application.persistentDataPath);
 
             //handle.data
 
@@ -61,11 +65,7 @@ public class NewBandleLoader : MonoBehaviour
     }
 
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+    //   void Update()   {       }
 
     IEnumerable LoadObject(string path)
     {
@@ -78,8 +78,8 @@ public class NewBandleLoader : MonoBehaviour
             Debug.Log("Failed to load AssetBundle!");
             yield break;
         }
-
-        AssetBundleRequest request = myLoadedAssetBundle.LoadAssetAsync<GameObject>("boat");
+       
+        AssetBundleRequest request = myLoadedAssetBundle.LoadAssetAsync<GameObject>("asteroids");
         yield return request;
 
         GameObject obj = request.asset as GameObject;

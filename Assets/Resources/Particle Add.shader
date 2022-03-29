@@ -16,7 +16,7 @@ Category {
     SubShader {
         Pass {
 
-            CGPROGRAM
+            CGPROGRAMñ
             #pragma vertex vert
             #pragma fragment frag
             #pragma target 2.0
