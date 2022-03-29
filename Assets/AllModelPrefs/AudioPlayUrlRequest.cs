@@ -2,16 +2,18 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Networking;
-
+[RequireComponent(typeof(AudioSource))]
 public class AudioPlayUrlRequest : MonoBehaviour
 {
-    // Start is called before the first frame update
+    public string urlStr;
     void Start()
     {
-        
+        audS = GetComponent<AudioSource>();
+        StartCoroutine(LoadAudioURL(urlStr));
     }
     public AudioClip source;
-    IEnumerator LoadHelper(string uri)
+    AudioSource audS;
+    IEnumerator LoadAudioURL(string uri)
     {
         UnityWebRequest www = UnityWebRequest.Get(uri);
         yield return www.SendWebRequest();
@@ -32,6 +34,16 @@ public class AudioPlayUrlRequest : MonoBehaviour
             var clip = AudioClip.Create("foo", samples.Length, mpgFile.Channels, mpgFile.SampleRate, false);
             clip.SetData(samples, 0);
             source = clip;
+
+            audS.clip = source;
+        }
+    }
+    void Update()
+    {
+        if (!audS.isPlaying && audS.clip.isReadyToPlay)
+        {
+           // audS.clip = source;
+            audS.Play();
         }
     }
 }

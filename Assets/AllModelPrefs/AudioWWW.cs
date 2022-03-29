@@ -1,11 +1,11 @@
 using UnityEngine;
 using System.Collections;
-
+[RequireComponent(typeof(AudioSource))]
 public class AudioWWW : MonoBehaviour
 {
-    public string url;
+    public string url = "http://kirikd.ru/Files/TestSound.mp3";
     public AudioSource source;
-
+ 
     IEnumerator Start()
     {
         source = GetComponent<AudioSource>();

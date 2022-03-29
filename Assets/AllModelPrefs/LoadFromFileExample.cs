@@ -8,7 +8,7 @@ public class LoadFromFileExample : MonoBehaviour
 {
     void Start()
     {
-        StartCoroutine(InstantiateObject());
+        StartCoroutine(DownloadBundles());
 
 /*
         var myLoadedAssetBundle
