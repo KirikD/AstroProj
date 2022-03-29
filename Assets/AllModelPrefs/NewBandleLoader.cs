@@ -7,11 +7,20 @@ using UnityEngine.Networking;
 
 public class NewBandleLoader : MonoBehaviour
 {
-    // Start is called before the first frame update
+    public string UrlBundleDawnload = "http://kirikd.ru/AstroProject/cosmos";
+    public string BundleFileFolderName = "AssetData";
+    public string BundleFileName = "CosmosFullBundle";
+
+    public string BundleLocalLoadPath = "Ќе нужно заполн€ть! поле забиваетс€ само!";
+    public string PrefabGameobjectName = "asteroids";
     void Start()
     {
-        StartCoroutine(downloadAsset("http://kirikd.ru/AstroProject/cosmos"));
-        // StartCoroutine(LoadObject("Application.persistentDataPath + WaterVehicles.unity3d"));
+        // но вначале пытаемс€ инстансировать его
+        BundleLocalLoadPath = Application.persistentDataPath + "/" + BundleFileFolderName + "/" + BundleFileName + ".unity3d";
+        StartCoroutine(LoadObject(BundleLocalLoadPath));
+
+        // скачиваем префаб
+        StartCoroutine(downloadAsset(UrlBundleDawnload));
     }
     IEnumerator downloadAsset(string URLpath)
     {
@@ -30,13 +39,13 @@ public class NewBandleLoader : MonoBehaviour
         }
         else
         {
-            UnityEngine.Debug.Log("Success   " + Application.persistentDataPath);
+            UnityEngine.Debug.Log("Success    " + Application.persistentDataPath + "/" + BundleFileFolderName + "/" + BundleFileName);
 
             //handle.data
 
             //Construct path to save it
-            string dataFileName = "WaterVehicles";
-            string tempPath = Path.Combine(Application.persistentDataPath, "AssetData");
+            string dataFileName = BundleFileName;
+            string tempPath = Path.Combine(Application.persistentDataPath, BundleFileFolderName);
             tempPath = Path.Combine(tempPath, dataFileName + ".unity3d");
 
             //Save
@@ -67,7 +76,7 @@ public class NewBandleLoader : MonoBehaviour
 
     //   void Update()   {       }
 
-    IEnumerable LoadObject(string path)
+    IEnumerator LoadObject(string path)
     {
         AssetBundleCreateRequest bundle = AssetBundle.LoadFromFileAsync(path);
         yield return bundle;
@@ -79,7 +88,7 @@ public class NewBandleLoader : MonoBehaviour
             yield break;
         }
        
-        AssetBundleRequest request = myLoadedAssetBundle.LoadAssetAsync<GameObject>("asteroids");
+        AssetBundleRequest request = myLoadedAssetBundle.LoadAssetAsync<GameObject>(PrefabGameobjectName);
         yield return request;
 
         GameObject obj = request.asset as GameObject;

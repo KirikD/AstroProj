@@ -18,6 +18,7 @@ GameObject:
   - component: {fileID: 3292112563885837248}
   - component: {fileID: 3292112563885837262}
   - component: {fileID: 3292112563885837259}
+  - component: {fileID: 3469287837189125109}
   m_Layer: 0
   m_Name: asteroids
   m_TagString: Untagged
@@ -286,6 +287,26 @@ MonoBehaviour:
   speedX: 9.56835
   speedY: -13.452
   speedZ: 17.35
+--- !u!114 &3469287837189125109
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2409011553507440765}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f691cfa8870978940911a79167b1ba46, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ShaderName: Legacy Shaders/Particles/Additive
+  TexName: _MainTex
+  TexPath: Textures/SoftSnowTEX
+  ColorN: _TintColor
+  ColorV: {r: 1, g: 1, b: 1, a: 0.4117647}
+  ShadNames:
+  - _High@1,5
+  texture: {fileID: 0}
 --- !u!1001 &3292112563286127204
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -631,7 +652,7 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 100000, guid: 031827899cbc03c45a926fcdf6b3a5f7, type: 3}
   m_PrefabInstance: {fileID: 3292112563544581579}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1824712653
+--- !u!114 &290200359165141333
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -643,7 +664,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f691cfa8870978940911a79167b1ba46, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ShaderName: Legacy Shaders/Particles/Additive
+  ShaderName: Legacy Shaders/Particles/Additive (Soft)
   TexName: _MainTex
   TexPath: Textures/SoftSnowTEX
   ColorN: _TintColor
