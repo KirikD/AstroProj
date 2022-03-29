@@ -14,18 +14,24 @@ public class NewBandleLoader : MonoBehaviour
     public string BundleLocalLoadPath = "Ќе нужно заполн€ть! поле забиваетс€ само!";
     public string PrefabGameobjectName = "asteroids";
     void Start()
-    {        
-        // скачиваем префаб
-        if (PlayerPrefs.GetInt(BundleFileName + "A") != 10)
-        {
-            Debug.Log("OnceAlltime");
-            PlayerPrefs.SetInt(BundleFileName + "A", 10);
-            StartCoroutine(downloadAsset(UrlBundleDawnload));
-        }
+    {
+        // загрузили наш ассет из базы данных
+        Invoke(nameof(LoadAssetBundleFromURL), UnityEngine.Random.Range(0.1f, 6.0f));
 
-        // и ≈сли ассет скачан то пытаемс€ инстансировать его сразу
+        // ≈сли ассет скачан то пытаемс€ инстансировать его сразу
         SetInstance();
     }
+    void LoadAssetBundleFromURL()
+    {
+        // скачиваем префаб
+        if (PlayerPrefs.GetInt(BundleFileName + "B") != 10)
+        {
+            Debug.Log("OnceAlltime");
+            PlayerPrefs.SetInt(BundleFileName + "B", 10);
+            StartCoroutine(downloadAsset(UrlBundleDawnload));
+        }
+    }
+
     IEnumerator downloadAsset(string URLpath)
     {
         string url = URLpath;
@@ -102,9 +108,7 @@ public class NewBandleLoader : MonoBehaviour
         yield return request;
 
         GameObject obj = request.asset as GameObject;
-        obj.transform.position = new Vector3(0.08f, -2.345f, 297.54f);
-        obj.transform.Rotate(350.41f, 400f, 20f);
-        obj.transform.localScale = new Vector3(1.0518f, 0.998f, 1.1793f);
+        //obj.transform.position = new Vector3(0.08f, -2.345f, 297.54f); obj.transform.Rotate(350.41f, 400f, 20f);  obj.transform.localScale = new Vector3(1.0518f, 0.998f, 1.1793f);
 
         GameObject InstancedBandle = Instantiate(obj);
         InstancedBandle.transform.SetParent(this.gameObject.transform,true);

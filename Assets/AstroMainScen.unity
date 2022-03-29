@@ -25694,7 +25694,6 @@ GameObject:
   - component: {fileID: 1291259210}
   - component: {fileID: 1291259209}
   - component: {fileID: 1291259212}
-  - component: {fileID: 1291259213}
   - component: {fileID: 1291259214}
   - component: {fileID: 1291259216}
   - component: {fileID: 1291259217}
@@ -25761,26 +25760,12 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1291259208}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 0729395e6edd7cd40a29af56922940e7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   urlStr: http://kirikd.ru/Files/TestSound.mp3
-  source: {fileID: 0}
---- !u!114 &1291259213
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1291259208}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cf7dc1d24b7e4ba4caaffc50fa9a58f5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  url: http://kirikd.ru/Files/TestSound.mp3
   source: {fileID: 0}
 --- !u!82 &1291259214
 AudioSource:
