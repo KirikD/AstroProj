@@ -4,16 +4,31 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.Networking;
 using System.IO;
-
+// скрипт загружает текстуру в память телефона и из нее применяет ее
 public class TextureLoadURL : MonoBehaviour
 {
-    public string url;
+    public string url; public string NameImage = "PrTexture.jpg";
     public RawImage YourRawImage;
     public Text UrlT, PathT, permissionT;
     void Start()
     {
-        StartCoroutine(DownloadImage(url));
+        // загрузили наш текстуру из базы данных
+        Invoke(nameof(LoadTextureFromURL), UnityEngine.Random.Range(0.1f, 1.0f));
 
+        // Если ассет скачан то пытаемся инстансировать его сразу
+        OlnlyLoadImg();
+
+
+    }
+    void LoadTextureFromURL()
+    {
+        // скачиваем префаб
+        if (PlayerPrefs.GetInt(url + "B") != 10)
+        {
+            Debug.Log("OnceAlltime");
+            PlayerPrefs.SetInt(url + "B", 10);
+            StartCoroutine(DownloadImage(url));
+        }
     }
     public Texture2D tex2D;
     IEnumerator DownloadImage(string MediaUrl)
@@ -32,8 +47,8 @@ public class TextureLoadURL : MonoBehaviour
             SaveImg();
             // сохранили текстуру куда то
             byte[] bytes = tex2D.EncodeToJPG();
-            System.IO.File.WriteAllBytes(Application.persistentDataPath + "/" + "PrTex.png", bytes);
-            permissionT.text = pathh = "" + Application.persistentDataPath + "/" + "PrTex.png";
+            System.IO.File.WriteAllBytes(Application.persistentDataPath + "/" + NameImage, bytes);
+            permissionT.text = pathh = "" + Application.persistentDataPath + "/" + NameImage;
             tex2D.Compress(true);
 
             OlnlyLoadImg();
@@ -41,15 +56,14 @@ public class TextureLoadURL : MonoBehaviour
     }
     public string pathh;
     void SaveImg()
-    {
-
-        NativeGallery.Permission permission = NativeGallery.SaveImageToGallery(YourRawImage.texture as Texture2D, "GalleryTest", "TextureA.jpg", (success, path) => pathh = path);
+    { 
+        NativeGallery.Permission permission = NativeGallery.SaveImageToGallery(YourRawImage.texture as Texture2D, "GalleryTest", NameImage, (success, path) => pathh = path);
         Debug.Log("Permission result: " + permission);
-        PathT.text = pathh;
-       
+        PathT.text = pathh;      
     }
     public void OlnlyLoadImg()
     {
+        pathh = "" + Application.persistentDataPath + "/" + NameImage;
         StartCoroutine(LoadTextureFromCache(pathh));
     }
     public Texture2D tex2DOlnly;
@@ -63,7 +77,8 @@ public class TextureLoadURL : MonoBehaviour
         yield return www.SendWebRequest();
         //texture loaded
         tex2DOlnly = DownloadHandlerTexture.GetContent(www);
-
+        tex2DOlnly.Compress(true);
+        YourRawImage.texture = tex2DOlnly; // тут блок когда мы применяем нашу текстуру
     }
 
 }
