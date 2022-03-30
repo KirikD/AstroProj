@@ -70,8 +70,8 @@ public class LevelLoader : MonoBehaviour
     public void ZoomIn(int Val)
     {
       zoomMax += Val; 
-      zoomMax = Mathf.Clamp(zoomMax, -2, 10);
-      if (Mathf.Clamp(zoomMax, -1, 9) == zoomMax)
+      zoomMax = Mathf.Clamp(zoomMax, -3, 20);
+      if (Mathf.Clamp(zoomMax, -2, 19) == zoomMax)
       {
           
         // if (Val == 1)
