@@ -154,7 +154,7 @@ public class DistanceEventMaster : MonoBehaviour
         transform.GetChild(AnimIndex).GetComponent<Animator>().Rebind();
         transform.GetChild(AnimIndex).GetComponent<Animator>().Update(0f);
         transform.GetChild(AnimIndex).GetComponent<Animator>().speed = 1.0f;
-       // AnimPoint[AnimIndex].GetComponent<AnimatorFunc>().PlayAnimator();
+        try { AnimPoint[AnimIndex].GetComponent<AnimatorFunc>().PlayStopAnimator(); } catch { }
     }
     // cписок функций что делаем в случае разрыва связей
     public void DeParent(Transform poss) // убираем парент

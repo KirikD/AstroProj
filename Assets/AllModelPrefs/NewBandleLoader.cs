@@ -110,10 +110,12 @@ public class NewBandleLoader : MonoBehaviour
         yield return request;
 
         GameObject obj = request.asset as GameObject;
-        //obj.transform.position = new Vector3(0.08f, -2.345f, 297.54f); obj.transform.Rotate(350.41f, 400f, 20f);  obj.transform.localScale = new Vector3(1.0518f, 0.998f, 1.1793f);
+        
+        //obj.transform.Rotate(350.41f, 400f, 20f);  obj.transform.localScale = new Vector3(1.0518f, 0.998f, 1.1793f);
 
         GameObject InstancedBandle = Instantiate(obj);
-        InstancedBandle.transform.SetParent(this.gameObject.transform,true);
+        //InstancedBandle.transform.localPosition = new Vector3(0.0f, InstancedBandle.transform.localPosition.y, 0.0f);
+        InstancedBandle.transform.SetParent(this.gameObject.transform,false);
 
         myLoadedAssetBundle.Unload(false);
     }
