@@ -23,7 +23,7 @@ public class VenusController : MonoBehaviour {
         return new Vector3(radius * Mathf.Sin(angle), 0, radius * Mathf.Cos(angle));
     }
 
-	void OnMouseDown() {
+/*	void OnMouseDown() {
 		bool zoom = ZoomTarget.zoom;
 		if (zoom) {
 			ZoomTarget.zoom = false;
@@ -36,5 +36,5 @@ public class VenusController : MonoBehaviour {
 			TimeScale.header = "Venus";
 			TimeScale.info = "Mass: 4.87 * 10^24 kg\nDiameter: 12104 km\nGravity: 8.9 m/s^2\nDistance from Sun: 108.2 * 10^6 km";
 		}
-	}
+	}*/
 }

@@ -13,6 +13,8 @@ public class NewBandleLoader : MonoBehaviour
 
     public string BundleLocalLoadPath = "Не нужно заполнять! поле забивается само!";
     public string PrefabGameobjectName = "asteroids";
+    // вестия базы данных ассета любой стринг
+    public string AssetDatBaseVersion = "A";
     void Start()
     {
         // загрузили наш ассет из базы данных
@@ -24,10 +26,10 @@ public class NewBandleLoader : MonoBehaviour
     void LoadAssetBundleFromURL()
     {
         // скачиваем префаб
-        if (PlayerPrefs.GetInt(BundleFileName + "B") != 10)
+        if (PlayerPrefs.GetInt(BundleFileName + AssetDatBaseVersion) != 10)
         {
             Debug.Log("OnceAlltime");
-            PlayerPrefs.SetInt(BundleFileName + "B", 10);
+            PlayerPrefs.SetInt(BundleFileName + AssetDatBaseVersion, 10);
             StartCoroutine(downloadAsset(UrlBundleDawnload));
         }
     }
