@@ -72,8 +72,7 @@ public class LevelLoader : MonoBehaviour
       zoomMax += Val; 
       zoomMax = Mathf.Clamp(zoomMax, -3, 20);
       if (Mathf.Clamp(zoomMax, -2, 19) == zoomMax)
-      {
-          
+      {          
         // if (Val == 1)
         //     ppm.zoomFunc(0.1f);
         //  if (Val == 1)
