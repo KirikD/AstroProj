@@ -20,14 +20,22 @@ public class DistanceEventMaster : MonoBehaviour
         allMarkers = GameObject.FindGameObjectsWithTag("MarkerTarg") ;
         foreach (GameObject lightuser in allMarkers)
         {
-           // lightuser.GetComponent<light>().enabled = false;
+            lightuser.GetComponent<DistanceEventMaster>().MarkerListUpdated();
         }
-        //  this.Invoke("OpenScreen", transform, 2f); //    this.Invoke("SetParent", 5.34f, 2f); // 
         DebugTXT[0].text ="" + allMarkers.Length;
         IndicatorMeshTest.enabled = false;
       
     }
 
+    /// /////////////////////////////////////////////
+
+    public void MarkerListUpdated() // вызываем когда доп маркер появился в мире
+    {
+      //  thisMainObj = this.transform.GetChild(0).transform.gameObject;
+        allMarkers = GameObject.FindGameObjectsWithTag("MarkerTarg");
+       // IndicatorMeshTest.enabled = false;
+
+    }
     // Массив со всеми маркерами
     public GameObject[] allMarkers;
     int AdderCucle = 0;
