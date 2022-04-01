@@ -56,7 +56,7 @@ public class NewBandleLoader : MonoBehaviour
             //handle.data
 
             //Construct path to save it
-            string dataFileName = BundleFileName;
+            string dataFileName = BundleFileName + AssetDatBaseVersion;
             string tempPath = Path.Combine(Application.persistentDataPath, BundleFileFolderName);
             tempPath = Path.Combine(tempPath, dataFileName + ".unity3d");
 
@@ -90,7 +90,7 @@ public class NewBandleLoader : MonoBehaviour
 
        void SetInstance()
     {    // и пытаемся инстансировать его
-        BundleLocalLoadPath = Application.persistentDataPath + "/" + BundleFileFolderName + "/" + BundleFileName + ".unity3d";
+        BundleLocalLoadPath = Application.persistentDataPath + "/" + BundleFileFolderName + "/" + BundleFileName + AssetDatBaseVersion + ".unity3d";
         StartCoroutine(LoadObject(BundleLocalLoadPath));
     }
 

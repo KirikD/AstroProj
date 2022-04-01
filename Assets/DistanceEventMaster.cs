@@ -47,13 +47,13 @@ public class DistanceEventMaster : MonoBehaviour
             float dist = Vector3.Distance(allMarkers[AdderCucle].transform.position, transform.position);
 
             // Если приблизились выводим имя
-            if (dist < DistanceAction && allMarkers[AdderCucle].name != transform.gameObject.name)
+            if (dist < DistanceAction && allMarkers[AdderCucle].name != transform.gameObject.name )
             {
 
 
                 if (oldName.Length < 3)
                 {            // единыжды вызываем
-                    if (oldName != allMarkers[AdderCucle].name)
+                    if (oldName != allMarkers[AdderCucle].name) //&& allMarkers[AdderCucle].GetComponent<DistanceEventMaster>().IndicatorMeshTest.enabled
                     {
                         oldMarker = allMarkers[AdderCucle];
                         oldName = allMarkers[AdderCucle].name;
@@ -70,7 +70,7 @@ public class DistanceEventMaster : MonoBehaviour
             // Если отдалились то у этого обжекта выводим имя
             if (dist > DistanceAction && allMarkers[AdderCucle].name != transform.gameObject.name)
             {
-                if (oldName == allMarkers[AdderCucle].name)
+                if (oldName == allMarkers[AdderCucle].name) //&& allMarkers[AdderCucle].GetComponent<DistanceEventMaster>().IndicatorMeshTest.enabled
                 {
 
                     //oldMarker = null;
@@ -78,13 +78,15 @@ public class DistanceEventMaster : MonoBehaviour
                     Debug.Log("<color=yellow>CollisionWidth: </color>" + allMarkers[AdderCucle].name);
                     DistantedOffMarker(allMarkers[AdderCucle].gameObject.name); // отдалились 
                                                                                 //if (oldObjGeom != null)
-                                                                                // Destroy(oldObjGeom);
                 }
             }
         }
      }
     public void SetMadkerDistDal() 
-    {      transform.position = new Vector3(UnityEngine.Random.Range(-999,999) , UnityEngine.Random.Range(-999, 999), UnityEngine.Random.Range(-999, 999)); Invoke("InvMadkerDistDal", 0.29f); Invoke("InvMadkerDistDal", 0.5f);  }
+    {    
+        transform.position = new Vector3(UnityEngine.Random.Range(-999,999) , UnityEngine.Random.Range(-999, 999), UnityEngine.Random.Range(-999, 999)); Invoke("InvMadkerDistDal", 0.29f); Invoke("InvMadkerDistDal", 0.5f);
+        ReturnPlanetOnMarkerLost();
+    }
     void InvMadkerDistDal()
     {      transform.position = new Vector3(UnityEngine.Random.Range(-999, 999), UnityEngine.Random.Range(-999, 999), UnityEngine.Random.Range(-999, 999));  }
     // сортируем массив по имени
@@ -112,6 +114,8 @@ public class DistanceEventMaster : MonoBehaviour
                 DebugTXT[1].text = "AllVar " + nam; DebugTXT[2].text = "AllVar " + AllVariantsActionsBase[i].name;          
                 this.Invoke(AllVariantsActionsBase[i].FuncOtdalF_A, allMarkers[AdderCucle].transform, AllVariantsActionsBase[i].delayE); // парент функ
                 this.Invoke(AllVariantsActionsBase[i].FuncOtdalF_B, allMarkers[AdderCucle].transform, AllVariantsActionsBase[i].delayF); // Аним функ
+
+
             }
         }
     }
@@ -188,6 +192,16 @@ public class DistanceEventMaster : MonoBehaviour
         oldObjGeom.transform.SetParent(oldMarker.transform,false);
         oldObjGeom.transform.SetSiblingIndex(0);
         oldObjGeom.transform.localPosition = new Vector3(0.0f, 0.0f, 0.0f); oldObjGeom.transform.localScale = Vector3.one;
+        // спрашиваем майн обжект у скрипта другого обжекта
+
+    }
+
+    public void ReturnPlanetOnMarkerLost() // возвращаем планету если маркер скрылся
+    {  //  трали вали куча кода
+        //Debug.Log(thisMainObj.name + "<color=black> ReturnPlanetParent: </color>" + oldObjGeom.name + " || " + oldMarker.name);
+        thisMainObj.transform.SetParent(transform, false);
+        thisMainObj.transform.SetSiblingIndex(0);
+        thisMainObj.transform.localPosition = new Vector3(0.0f, 0.0f, 0.0f); oldObjGeom.transform.localScale = Vector3.one;
         // спрашиваем майн обжект у скрипта другого обжекта
 
     }
