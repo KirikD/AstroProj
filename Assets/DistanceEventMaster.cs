@@ -10,8 +10,11 @@ public class DistanceEventMaster : MonoBehaviour
     // Start is called before the first frame update
     [Header("точка обжект анимации к которой парентим дочерний обжект")]
     public Transform[] AnimPoint; public int AnimIndex;
+    GameObject thisMainObj; // это главный обект этого маркера
     void Start()
     {
+        thisMainObj = this.transform.GetChild(0).transform.gameObject;
+
         allMarkers = GameObject.FindGameObjectsWithTag("MarkerTarg") ;
         foreach (GameObject lightuser in allMarkers)
         {
@@ -24,7 +27,7 @@ public class DistanceEventMaster : MonoBehaviour
     // Массив со всеми маркерами
     public GameObject[] allMarkers;
     int AdderCucle = 0;
-    string oldName  =""; GameObject oldObjGeom ;
+    string oldName  =""; GameObject oldObjGeom; GameObject oldMarker;
 
     [Header("Дистанция с которой начинаем взаимодействовать")]
     public float DistanceAction = 3;
@@ -44,8 +47,7 @@ public class DistanceEventMaster : MonoBehaviour
             {            // единыжды вызываем
                 if (oldName != allMarkers[AdderCucle].name)
                 {
-                    //if (oldObjGeom != null)
-                        //Destroy(oldObjGeom);
+                    oldMarker = allMarkers[AdderCucle];
                     oldName = allMarkers[AdderCucle].name;
 
                     Debug.Log("<color=green>CollisionWidth: </color>" + allMarkers[AdderCucle].name);
@@ -63,7 +65,7 @@ public class DistanceEventMaster : MonoBehaviour
             if (oldName == allMarkers[AdderCucle].name)
             {
 
-
+                //oldMarker = null;
                 oldName = " ";
                 Debug.Log("<color=yellow>CollisionWidth: </color>" + allMarkers[AdderCucle].name);
                 DistantedOffMarker(allMarkers[AdderCucle].gameObject.name); // отдалились 
@@ -167,8 +169,19 @@ public class DistanceEventMaster : MonoBehaviour
     { transform.GetChild(0).GetChild(AnimIndex).gameObject.SetActive(true); Debug.Log("<color=red>GrozaInCiclonFunctionOn: </color>" + MainObj.gameObject.name);  }// гроза  
     public void GrozaInCiclonFunctionOff(Transform MainObj) // выполняем это на самом обекте на котором скрипт
     { transform.GetChild(0).GetChild(AnimIndex).gameObject.SetActive(false); }// гроза  
+    // возвращаем планету на место при разрыве маркеров их связи по расстоянию
+    public void ReturnPlanetParent(Transform pos) // убираем парент
+    {  //  трали вали куча кода
+        Debug.Log(thisMainObj.name + "<color=black> ReturnPlanetParent: </color>" + oldObjGeom.name + " || " + oldMarker.name);
+        oldObjGeom.transform.SetParent(oldMarker.transform,false);
+        oldObjGeom.transform.SetSiblingIndex(0);
+        oldObjGeom.transform.localPosition = new Vector3(0.0f, 0.0f, 0.0f);
+        // спрашиваем майн обжект у скрипта другого обжекта
 
+    }
 }
+
+
 
 namespace UnityEngine
 {
