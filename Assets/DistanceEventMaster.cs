@@ -6,13 +6,15 @@ using UnityEngine;
 using UnityEngine.UI;
 public class DistanceEventMaster : MonoBehaviour
 {
-    public Text[] DebugTXT;
+    public MeshRenderer IndicatorMeshTest;
+    public Text[] DebugTXT; public Text DebugUniqueTXT;
     // Start is called before the first frame update
     [Header("точка обжект анимации к которой парентим дочерний обжект")]
     public Transform[] AnimPoint; public int AnimIndex;
     GameObject thisMainObj; // это главный обект этого маркера
     void Start()
     {
+      
         thisMainObj = this.transform.GetChild(0).transform.gameObject;
 
         allMarkers = GameObject.FindGameObjectsWithTag("MarkerTarg") ;
@@ -22,6 +24,8 @@ public class DistanceEventMaster : MonoBehaviour
         }
         //  this.Invoke("OpenScreen", transform, 2f); //    this.Invoke("SetParent", 5.34f, 2f); // 
         DebugTXT[0].text ="" + allMarkers.Length;
+        IndicatorMeshTest.enabled = false;
+      
     }
 
     // Массив со всеми маркерами
@@ -33,48 +37,56 @@ public class DistanceEventMaster : MonoBehaviour
     public float DistanceAction = 3;
     void Update()
     {
-        if (AdderCucle > allMarkers.Length-2)
-            AdderCucle = -1;
-        AdderCucle += 1;
-        float dist = Vector3.Distance(allMarkers[AdderCucle].transform.position, transform.position);
-       
-        // Если приблизились выводим имя
-        if (dist < DistanceAction && allMarkers[AdderCucle].name != transform.gameObject.name)
+        DebugUniqueTXT.text = this.gameObject.name + IndicatorMeshTest.enabled +" || " + transform.position;
+        if (IndicatorMeshTest.enabled)
         {
-            
+          
+            if (AdderCucle > allMarkers.Length - 2)
+                AdderCucle = -1;
+            AdderCucle += 1;
+            float dist = Vector3.Distance(allMarkers[AdderCucle].transform.position, transform.position);
 
-            if (oldName.Length < 3)
-            {            // единыжды вызываем
-                if (oldName != allMarkers[AdderCucle].name)
-                {
-                    oldMarker = allMarkers[AdderCucle];
-                    oldName = allMarkers[AdderCucle].name;
-
-                    Debug.Log("<color=green>CollisionWidth: </color>" + allMarkers[AdderCucle].name);
-                    AllVariantsActionsBaseNameSort(allMarkers[AdderCucle].gameObject.name); // допустим взаимодействуем с астеройдом пишем сюда имя астеройда
-                    DebugTXT[0].text = "" + allMarkers[AdderCucle].name;
-
-                    oldObjGeom = allMarkers[AdderCucle].transform.GetChild(0).gameObject;
-                }
-              
-            }
-        }
-        // Если отдалились то у этого обжекта выводим имя
-        if (dist > DistanceAction && allMarkers[AdderCucle].name != transform.gameObject.name)
-        {
-            if (oldName == allMarkers[AdderCucle].name)
+            // Если приблизились выводим имя
+            if (dist < DistanceAction && allMarkers[AdderCucle].name != transform.gameObject.name)
             {
 
-                //oldMarker = null;
-                oldName = " ";
-                Debug.Log("<color=yellow>CollisionWidth: </color>" + allMarkers[AdderCucle].name);
-                DistantedOffMarker(allMarkers[AdderCucle].gameObject.name); // отдалились 
-                //if (oldObjGeom != null)
-                   // Destroy(oldObjGeom);
+
+                if (oldName.Length < 3)
+                {            // единыжды вызываем
+                    if (oldName != allMarkers[AdderCucle].name)
+                    {
+                        oldMarker = allMarkers[AdderCucle];
+                        oldName = allMarkers[AdderCucle].name;
+
+                        Debug.Log("<color=green>CollisionWidth: </color>" + allMarkers[AdderCucle].name);
+                        AllVariantsActionsBaseNameSort(allMarkers[AdderCucle].gameObject.name); // допустим взаимодействуем с астеройдом пишем сюда имя астеройда
+                        DebugTXT[0].text = "" + allMarkers[AdderCucle].name;
+                        DebugUniqueTXT.text = this.gameObject.name + " || " + allMarkers[AdderCucle].name + " || " + transform.position;
+                        oldObjGeom = allMarkers[AdderCucle].transform.GetChild(0).gameObject;
+                    }
+
+                }
+            }
+            // Если отдалились то у этого обжекта выводим имя
+            if (dist > DistanceAction && allMarkers[AdderCucle].name != transform.gameObject.name)
+            {
+                if (oldName == allMarkers[AdderCucle].name)
+                {
+
+                    //oldMarker = null;
+                    oldName = " ";
+                    Debug.Log("<color=yellow>CollisionWidth: </color>" + allMarkers[AdderCucle].name);
+                    DistantedOffMarker(allMarkers[AdderCucle].gameObject.name); // отдалились 
+                                                                                //if (oldObjGeom != null)
+                                                                                // Destroy(oldObjGeom);
+                }
             }
         }
-
      }
+    public void SetMadkerDistDal() 
+    {      transform.position = new Vector3(UnityEngine.Random.Range(-999,999) , UnityEngine.Random.Range(-999, 999), UnityEngine.Random.Range(-999, 999)); Invoke("InvMadkerDistDal", 0.29f); Invoke("InvMadkerDistDal", 0.5f);  }
+    void InvMadkerDistDal()
+    {      transform.position = new Vector3(UnityEngine.Random.Range(-999, 999), UnityEngine.Random.Range(-999, 999), UnityEngine.Random.Range(-999, 999));  }
     // сортируем массив по имени
     void AllVariantsActionsBaseNameSort(string nam) // выполняем когда приблизили к маркеру
     {
@@ -156,7 +168,7 @@ public class DistanceEventMaster : MonoBehaviour
         transform.GetChild(AnimIndex).GetComponent<Animator>().Rebind();
         transform.GetChild(AnimIndex).GetComponent<Animator>().Update(0f);
         transform.GetChild(AnimIndex).GetComponent<Animator>().speed = 1.0f;
-        try { AnimPoint[AnimIndex].GetComponent<AnimatorFunc>().PlayStopAnimator(); } catch { }
+        try { for (int ai = 0; ai < AnimPoint.Length; ai++)  AnimPoint[ai].GetComponent<AnimatorFunc>().PlayStopAnimator(); } catch { }
     }
     // cписок функций что делаем в случае разрыва связей
     public void DeParent(Transform poss) // убираем парент
@@ -175,7 +187,7 @@ public class DistanceEventMaster : MonoBehaviour
         Debug.Log(thisMainObj.name + "<color=black> ReturnPlanetParent: </color>" + oldObjGeom.name + " || " + oldMarker.name);
         oldObjGeom.transform.SetParent(oldMarker.transform,false);
         oldObjGeom.transform.SetSiblingIndex(0);
-        oldObjGeom.transform.localPosition = new Vector3(0.0f, 0.0f, 0.0f);
+        oldObjGeom.transform.localPosition = new Vector3(0.0f, 0.0f, 0.0f); oldObjGeom.transform.localScale = Vector3.one;
         // спрашиваем майн обжект у скрипта другого обжекта
 
     }

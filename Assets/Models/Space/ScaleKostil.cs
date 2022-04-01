@@ -5,35 +5,37 @@ using UnityEngine;
 public class ScaleKostil : MonoBehaviour
 {
     GameObject planetScalObj;
-    void Start()
-    {
 
-        planetScalObj = this.transform.GetChild(0).gameObject;
-        Destroy(planetScalObj.GetComponent<ScaleSetterFix>());
-    }
-
-
-    
     int adder = 0;
-    float scalMnoz = 1;
+
     void Update()
     {
 
 
-        //  if (activ)
-        //{
-        if (adder == 1)
+
+            adder++; 
+        if (adder == 2)
         {
-            planetScalObj = this.transform.GetChild(0).gameObject;
-            Destroy(planetScalObj.GetComponent<ScaleSetterFix>());
+            if (transform.childCount == 0) 
+                { this.gameObject.GetComponent<ScaleKostil>().enabled = false; adder = 0; }
+            else
+                 planetScalObj = transform.GetChild(0).gameObject;
+
+            //Destroy(planetScalObj.GetComponent<ScaleSetterFix>());
+
+            if(planetScalObj == null) { this.gameObject.GetComponent<ScaleKostil>().enabled = false; adder = 0; }
         }
-            adder++;
-        
         if (adder > 75)
-                Destroy(this.gameObject.GetComponent<ScaleKostil> ());
+            { this.gameObject.GetComponent<ScaleKostil>().enabled = false; adder = 0;  }
+
+        if (adder > 2)
+            planetScalObj.transform.localScale = planetScalObj.transform.localScale * 0.99f;
+           
         
-        scalMnoz -= 0.01f;
-        planetScalObj.transform.localScale = planetScalObj.transform.localScale * 0.99f;
+
+       
+
+
       //  }
     }
 }
